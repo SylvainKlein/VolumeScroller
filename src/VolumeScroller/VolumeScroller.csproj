@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <AssemblyName>VolumeScroller</AssemblyName>
+    <RootNamespace>VolumeScroller</RootNamespace>
+    <Version>1.0.0</Version>
+    <Product>Volume Scroller</Product>
+    <Company>Sylvain</Company>
+    <Description>Contrôleur de volume Windows à la molette de souris</Description>
+  </PropertyGroup>
+
+</Project>
