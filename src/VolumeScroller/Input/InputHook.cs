@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using Forms = System.Windows.Forms;
+using VolumeScroller.Config;
 
 namespace VolumeScroller.Input
 {
@@ -11,15 +12,13 @@ namespace VolumeScroller.Input
         private const int WH_MOUSE_LL = 14;
         private const int WM_MOUSEWHEEL = 0x020A;
 
-        private const int VK_LMENU = 0xA4; // Left Alt
-        private const int VK_RMENU = 0xA5; // Right Alt
-
         public delegate void VolumeWheelAction(int stepPercent);
         public event VolumeWheelAction? OnVolumeWheel;
 
         private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
         private readonly LowLevelMouseProc _mouseProc;
         private IntPtr _mouseHookId = IntPtr.Zero;
+        private readonly AppSettings _settings;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct POINT
@@ -63,8 +62,9 @@ namespace VolumeScroller.Input
         [DllImport("user32.dll", ExactSpelling = true)]
         private static extern IntPtr GetAncestor(IntPtr hwnd, uint gaFlags);
 
-        public InputHook()
+        public InputHook(AppSettings settings)
         {
+            _settings = settings;
             _mouseProc = MouseHookCallback;
         }
 
@@ -95,13 +95,26 @@ namespace VolumeScroller.Input
                 var hookStruct = Marshal.PtrToStructure<MSLLHOOKSTRUCT>(lParam);
                 short rawDelta = (short)((hookStruct.mouseData >> 16) & 0xffff);
 
-                // Trigger 1: ALT key held down
-                bool isAltDown = (GetAsyncKeyState(VK_LMENU) < 0) || (GetAsyncKeyState(VK_RMENU) < 0);
+                // Trigger 1: Configured shortcut key combination held down
+                bool isShortcutDown = false;
+                var keys = _settings.ShortcutKeys;
+                if (keys != null && keys.Count > 0)
+                {
+                    isShortcutDown = true;
+                    foreach (int vk in keys)
+                    {
+                        if ((GetAsyncKeyState(vk) & 0x8000) == 0)
+                        {
+                            isShortcutDown = false;
+                            break;
+                        }
+                    }
+                }
 
                 // Trigger 2: Cursor over taskbar area
                 bool isOverTaskbar = IsPointOverTaskbar(hookStruct.pt);
 
-                if (isAltDown || isOverTaskbar)
+                if (isShortcutDown || isOverTaskbar)
                 {
                     int notches = rawDelta / 120;
                     if (notches == 0)

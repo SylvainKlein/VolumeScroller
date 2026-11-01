@@ -40,7 +40,7 @@
 Controlling audio volume on Windows often feels clunky: you either have to click the tiny speaker icon in the taskbar, reach for keyboard function keys, or install heavy, bloated customization software that eats memory and conflicts with existing shortcuts.
 
 **Volume Scroller** is designed with a simple philosophy: **instant, intuitive control with zero bloat.**
-* **Alt + Scroll** anywhere on your desktop or inside any app.
+* **Ctrl + Alt + Scroll** (or your own customizable shortcut) anywhere on your desktop or inside any app.
 * **Scroll over the Taskbar** with a quick flick of your mouse, single-handed without touching the keyboard.
 * A sleek floating on-screen pill follows your cursor and guarantees full visibility without stealing window focus.
 
@@ -53,8 +53,8 @@ Controlling audio volume on Windows often feels clunky: you either have to click
   * Zero Electron, zero Chromium, zero webviews, zero background telemetries.
   * Ultra-compact standalone executable (~195 KB) with near-zero CPU and ~15 MB RAM usage.
 
-* **🖱️ Natural Dual-Trigger Controls**
-  * **`Alt` + Mouse Wheel**: Adjust volume instantly wherever your cursor is (games, full-screen videos, creative apps).
+* **🖱️ Natural Dual-Trigger Controls & Custom Shortcut**
+  * **`Ctrl` + `Alt` + Mouse Wheel (Customizable)**: Adjust volume instantly wherever your cursor is (games, full-screen videos, creative apps) with zero conflict in editing software (DaVinci Resolve, Premiere Pro...). Easily rebind your trigger anytime via the tray menu!
   * **Mouse Wheel over Taskbar**: Hover over any taskbar region (primary or secondary monitors) and scroll without touching the keyboard.
   * **Scroll interception**: Page or document scrolling under the mouse is automatically suppressed while adjusting volume.
 
@@ -92,11 +92,12 @@ Head over to the **[GitHub Releases](../../releases/latest)** page to grab the l
 
 | Shortcut / Action | Function |
 |---|---|
-| <kbd>Alt</kbd> + <kbd>Wheel Up</kbd> | Increase volume (+2%) |
-| <kbd>Alt</kbd> + <kbd>Wheel Down</kbd> | Decrease volume (-2%) |
+| <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Wheel Up</kbd> | Increase volume (+2%) *(rebindable)* |
+| <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Wheel Down</kbd> | Decrease volume (-2%) *(rebindable)* |
 | <kbd>Wheel</kbd> over Taskbar | Adjust volume without keyboard |
+| **"Modifier le raccourci global..."** | Right-click tray icon > press your keys and validate |
 | **Double-Click Systray Icon** | Preview / test the OSD floating pill |
-| **Right-Click Systray Icon** | Open context menu (Toggle Startup, Test OSD, Quit) |
+| **Right-Click Systray Icon** | Open context menu (Edit shortcut, Toggle Startup, Test OSD, Quit) |
 
 ---
 

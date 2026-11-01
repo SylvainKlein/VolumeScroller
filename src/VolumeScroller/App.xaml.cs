@@ -3,6 +3,7 @@ using System.Threading;
 using System.Windows;
 using Forms = System.Windows.Forms;
 using VolumeScroller.Audio;
+using VolumeScroller.Config;
 using VolumeScroller.Input;
 using VolumeScroller.Tray;
 using VolumeScroller.UI;
@@ -14,6 +15,7 @@ namespace VolumeScroller
         private const string MutexName = "VolumeScroller_SingleInstance_Mutex";
         private Mutex? _singleInstanceMutex;
 
+        private AppSettings? _settings;
         private AudioController? _audioController;
         private OsdWindow? _osdWindow;
         private InputHook? _inputHook;
@@ -37,14 +39,15 @@ namespace VolumeScroller
 
             try
             {
+                _settings = SettingsManager.Load();
                 _audioController = new AudioController();
                 _osdWindow = new OsdWindow();
 
-                _inputHook = new InputHook();
+                _inputHook = new InputHook(_settings);
                 _inputHook.OnVolumeWheel += HandleVolumeWheel;
                 _inputHook.Start();
 
-                _trayIconManager = new TrayIconManager(_audioController, _osdWindow);
+                _trayIconManager = new TrayIconManager(_audioController, _osdWindow, _settings);
             }
             catch (Exception ex)
             {

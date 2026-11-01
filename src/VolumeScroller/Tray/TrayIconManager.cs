@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using Forms = System.Windows.Forms;
 using VolumeScroller.Audio;
+using VolumeScroller.Config;
 using VolumeScroller.Startup;
 using VolumeScroller.UI;
 
@@ -14,12 +15,15 @@ namespace VolumeScroller.Tray
         private Forms.NotifyIcon? _notifyIcon;
         private readonly AudioController _audioController;
         private readonly OsdWindow _osdWindow;
+        private readonly AppSettings _settings;
         private Forms.ToolStripMenuItem? _startupMenuItem;
+        private ShortcutConfigWindow? _shortcutWindow;
 
-        public TrayIconManager(AudioController audioController, OsdWindow osdWindow)
+        public TrayIconManager(AudioController audioController, OsdWindow osdWindow, AppSettings settings)
         {
             _audioController = audioController;
             _osdWindow = osdWindow;
+            _settings = settings;
 
             InitializeTray();
         }
@@ -28,9 +32,9 @@ namespace VolumeScroller.Tray
         {
             _notifyIcon = new Forms.NotifyIcon
             {
-                Text = "Volume Scroller\nAlt + Molette ou Barre des tâches",
                 Visible = true
             };
+            UpdateTrayText();
 
             // Load icon
             try
@@ -60,6 +64,11 @@ namespace VolumeScroller.Tray
             };
             contextMenu.Items.Add(titleItem);
             contextMenu.Items.Add(new Forms.ToolStripSeparator());
+
+            // Edit global shortcut option
+            var shortcutItem = new Forms.ToolStripMenuItem("Modifier le raccourci global...");
+            shortcutItem.Click += (s, e) => OpenShortcutConfig();
+            contextMenu.Items.Add(shortcutItem);
 
             // Startup option (Run with Windows)
             _startupMenuItem = new Forms.ToolStripMenuItem("Démarrer avec Windows")
@@ -96,6 +105,31 @@ namespace VolumeScroller.Tray
                 var (vol, muted) = _audioController.GetCurrentState();
                 _osdWindow.ShowVolume(vol, muted);
             };
+        }
+
+        private void UpdateTrayText()
+        {
+            if (_notifyIcon == null) return;
+            string text = $"Volume Scroller\n{_settings.ShortcutDisplayText} + Molette ou Barre des tâches";
+            if (text.Length >= 64)
+            {
+                text = text.Substring(0, 63);
+            }
+            _notifyIcon.Text = text;
+        }
+
+        private void OpenShortcutConfig()
+        {
+            if (_shortcutWindow != null && _shortcutWindow.IsLoaded)
+            {
+                _shortcutWindow.Activate();
+                return;
+            }
+
+            _shortcutWindow = new ShortcutConfigWindow(_settings);
+            _shortcutWindow.OnShortcutUpdated += (s) => UpdateTrayText();
+            _shortcutWindow.Closed += (s, e) => _shortcutWindow = null;
+            _shortcutWindow.Show();
         }
 
         private void ToggleStartup()

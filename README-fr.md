@@ -40,7 +40,7 @@
 Gérer le son sur Windows est souvent contraignant : il faut soit viser la minuscule icône de haut-parleur dans la barre des tâches, soit atteindre des touches de fonction sur le clavier, soit installer de lourds utilitaires qui consomment beaucoup de mémoire et créent des conflits de raccourcis.
 
 **Volume Scroller** repose sur un principe clair : **un contrôle instantané, ergonomique et zéro fioriture.**
-* **Alt + Molette** n'importe où sur votre bureau ou dans vos applications.
+* **Ctrl + Alt + Molette** (ou votre propre raccourci personnalisable) n'importe où sur votre bureau ou dans vos applications.
 * **Molette sur la barre des tâches** d'un simple coup de souris, à une main sans toucher au clavier.
 * Une élégante pastille OSD flottante suit votre curseur en temps réel et garantit une visibilité totale sans jamais voler le focus de vos fenêtres.
 
@@ -53,8 +53,8 @@ Gérer le son sur Windows est souvent contraignant : il faut soit viser la minus
   * Zéro Electron, zéro Chromium, zéro webview, aucune télémétrie en arrière-plan.
   * Exécutable autonome ultra-compact (~195 Ko), consommation CPU quasi nulle et ~15 Mo de RAM.
 
-* **🖱️ Double Déclencheur Intuitif & Naturel**
-  * **`Alt` + Molette** : Ajustez le volume instantanément où que soit votre curseur (en jeu, devant une vidéo plein écran, dans vos logiciels de création).
+* **🖱️ Double Déclencheur Intuitif & Raccourci Personnalisable**
+  * **`Ctrl` + `Alt` + Molette (personnalisable)** : Ajustez le volume instantanément où que soit votre curseur sans conflit avec vos logiciels de montage (DaVinci Resolve, Premiere Pro...). Modifiez facilement votre combinaison de touches via un simple clic droit sur l'icône !
   * **Molette sur la barre des tâches** : Survolez simplement la barre des tâches (écran principal ou multi-écrans) et scrollez à la souris sans toucher au clavier.
   * **Interception du défilement** : Le défilement de la page ou du document sous la souris est automatiquement neutralisé lors du réglage de volume.
 
@@ -92,11 +92,12 @@ Rendez-vous sur la page **[GitHub Releases](../../releases/latest)** pour télé
 
 | Action | Effet |
 |---|---|
-| <kbd>Alt</kbd> + <kbd>Molette Haut</kbd> | Augmente le volume (+2%) |
-| <kbd>Alt</kbd> + <kbd>Molette Bas</kbd> | Diminue le volume (-2%) |
+| <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Molette Haut</kbd> | Augmente le volume (+2%) *(raccourci modifiable)* |
+| <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Molette Bas</kbd> | Diminue le volume (-2%) *(raccourci modifiable)* |
 | <kbd>Molette</kbd> sur la barre des tâches | Ajuste le son à la souris seule |
+| **Modifier le raccourci global...** | Clic droit sur l'icône > pressez vos touches et validez |
 | **Double-clic sur l'icône systray** | Affiche / teste la pastille OSD flottante |
-| **Clic droit sur l'icône systray** | Ouvre le menu contextuel (Démarrer avec Windows, Tester l'OSD, Quitter) |
+| **Clic droit sur l'icône systray** | Ouvre le menu contextuel (Raccourci, Démarrer avec Windows, Tester l'OSD, Quitter) |
 
 ---
 
